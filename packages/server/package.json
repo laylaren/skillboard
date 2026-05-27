@@ -41,7 +41,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "prepublishOnly": "node -e \"const f=require('node:fs');f.rmSync('web-dist',{recursive:true,force:true});f.cpSync('../web/dist','web-dist',{recursive:true})\""
+    "prepack": "node -e \"const f=require('node:fs');f.copyFileSync('../../README.md','README.md');f.copyFileSync('../../LICENSE','LICENSE');f.rmSync('web-dist',{recursive:true,force:true});f.cpSync('../web/dist','web-dist',{recursive:true})\""
   },
   "dependencies": {
     "@fastify/cors": "^10.0.1",

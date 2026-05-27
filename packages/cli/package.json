@@ -41,6 +41,9 @@
     "README.md",
     "LICENSE"
   ],
+  "scripts": {
+    "prepack": "node -e \"const f=require('node:fs');f.copyFileSync('../../README.md','README.md');f.copyFileSync('../../LICENSE','LICENSE')\""
+  },
   "dependencies": {
     "@one-skill/core": "^0.1.0",
     "@one-skill/server": "^0.1.0",

@@ -4,6 +4,11 @@ dist/
 .DS_Store
 .one-skill/
 
+# Per-package README/LICENSE/web-dist are copied in by `prepack` — not source.
+packages/*/README.md
+packages/*/LICENSE
+packages/server/web-dist/
+
 # Local Claude Code config — but keep the demo skill that ships with the repo.
 .claude/*
 !.claude/skills/

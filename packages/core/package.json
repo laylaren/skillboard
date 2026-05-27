@@ -38,6 +38,9 @@
     "README.md",
     "LICENSE"
   ],
+  "scripts": {
+    "prepack": "node -e \"const f=require('node:fs');f.copyFileSync('../../README.md','README.md');f.copyFileSync('../../LICENSE','LICENSE')\""
+  },
   "dependencies": {
     "chokidar": "^4.0.3",
     "gray-matter": "^4.0.3"
