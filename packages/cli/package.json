@@ -1,0 +1,52 @@
+{
+  "name": "one-skill",
+  "version": "0.1.0",
+  "description": "Local dashboard for inspecting and managing Claude Code / Codex / Cursor / openclaw skills.",
+  "license": "MIT",
+  "author": "",
+  "homepage": "https://github.com/<your-github>/one-skill#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/<your-github>/one-skill.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/<your-github>/one-skill/issues"
+  },
+  "keywords": [
+    "claude-code",
+    "codex",
+    "cursor",
+    "openclaw",
+    "skills",
+    "agent",
+    "dashboard",
+    "cli",
+    "anthropic"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "bin": {
+    "one-skill": "./bin/one-skill.mjs"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@one-skill/core": "^0.1.0",
+    "@one-skill/server": "^0.1.0",
+    "commander": "^12.1.0",
+    "open": "^10.1.0",
+    "picocolors": "^1.1.1",
+    "tsx": "^4.19.2"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "one-skill-monorepo",
+  "version": "0.1.0",
+  "description": "Monorepo root for one-skill — a local dashboard for managing skills across Claude Code, Codex, Cursor, and openclaw.",
+  "license": "MIT",
+  "author": "",
+  "homepage": "https://github.com/<your-github>/one-skill#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/<your-github>/one-skill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/<your-github>/one-skill/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "cli": "tsx packages/cli/src/cli.ts",
+    "web:build": "npm --workspace=@one-skill/web run build",
+    "web:dev": "npm --workspace=@one-skill/web run dev",
+    "serve": "tsx packages/cli/src/cli.ts serve",
+    "typecheck": "tsc -b",
+    "prepare": "npm run web:build --if-present"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

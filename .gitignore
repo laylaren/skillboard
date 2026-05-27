@@ -1,0 +1,22 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.DS_Store
+.one-skill/
+
+# Local Claude Code config — but keep the demo skill that ships with the repo.
+.claude/*
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/one-skill-demo/
+
+# Editor / OS
+.vscode/
+.idea/
+*.log
+npm-debug.log*
+
+# Env
+.env
+.env.local
+.env.*.local

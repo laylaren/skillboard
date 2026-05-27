@@ -1,0 +1,45 @@
+{
+  "name": "@one-skill/core",
+  "version": "0.1.0",
+  "description": "Core scanner, adapters, and version-management primitives for one-skill.",
+  "license": "MIT",
+  "author": "",
+  "homepage": "https://github.com/<your-github>/one-skill#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/<your-github>/one-skill.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/<your-github>/one-skill/issues"
+  },
+  "keywords": [
+    "claude-code",
+    "codex",
+    "cursor",
+    "openclaw",
+    "skills",
+    "agent"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "chokidar": "^4.0.3",
+    "gray-matter": "^4.0.3"
+  }
+}
