@@ -45,6 +45,15 @@ npx one-skill
 
 Claude Code 的 plugin 自带 skill（`~/.claude/plugins/cache/.../skills/`）以只读形式展示——修改请走 `/plugin`。
 
+## 平台支持
+
+| 平台 | 状态 | 说明 |
+| --- | --- | --- |
+| macOS | 完全支持 | 主开发平台，全部功能端到端验证过。 |
+| Linux | 应该可用 | 代码跨平台，但没经过充分实测。"在文件管理器中显示"只能开父目录、不高亮文件（xdg-open 限制）。 |
+| Windows | 大部分可用 | 基本功能没问题，但 `safe-merge` 要创建 symlink，Windows 上需要管理员权限或开启 Developer Mode。 |
+| Windows + WSL2 | Windows 用户推荐 | 行为等同 Linux，没有 symlink 权限问题。 |
+
 ## 数据存在哪
 
 所有本地状态在 `~/.one-skill/` 下：

@@ -45,6 +45,15 @@ npx one-skill
 
 Claude Code's plugin-bundled skills under `~/.claude/plugins/cache/.../skills/` are shown read-only — modifications belong to `/plugin`.
 
+## Platform support
+
+| Platform | Status | Notes |
+| --- | --- | --- |
+| macOS | Fully supported | Primary development platform — everything tested end-to-end. |
+| Linux | Should work | Cross-platform code paths; not extensively tested. "Reveal in file manager" opens the parent directory rather than highlighting the file (xdg-open limitation). |
+| Windows | Mostly works | Most features fine, but `safe-merge` creates symlinks which require Administrator or Developer Mode on Windows. |
+| Windows + WSL2 | Recommended for Windows users | Behaves like Linux; no symlink permission issues. |
+
 ## Where data is stored
 
 All of one-skill's local state lives under `~/.one-skill/`:
