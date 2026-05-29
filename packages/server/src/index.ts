@@ -33,12 +33,12 @@ import {
   findProjectCandidates,
   SkillWatcher,
   type Skill,
-} from '@skillboard/core';
+} from '@ai-skillboard/core';
 
 const here = dirname(fileURLToPath(import.meta.url));
 /**
  * Where the built SPA lives. Two layouts to support:
- *   - Published `@skillboard/server` tarball: `web-dist/` sits next to `src/`
+ *   - Published `@ai-skillboard/server` tarball: `web-dist/` sits next to `src/`
  *     (populated by the package's `prepublishOnly` script).
  *   - Monorepo dev tree: built SPA lives at `packages/web/dist/`.
  * Pick whichever exists at module load; fall back to the monorepo path so the

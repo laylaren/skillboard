@@ -1,5 +1,5 @@
 {
-  "name": "skillboard",
+  "name": "ai-skillboard",
   "version": "0.1.0",
   "description": "Local dashboard for inspecting and managing Claude Code / Codex / Cursor / openclaw skills.",
   "license": "MIT",
@@ -33,7 +33,7 @@
   },
   "type": "module",
   "bin": {
-    "skillboard": "./bin/skillboard.mjs"
+    "ai-skillboard": "./bin/ai-skillboard.mjs"
   },
   "files": [
     "bin/",
@@ -45,8 +45,8 @@
     "prepack": "node -e \"const f=require('node:fs');f.copyFileSync('../../README.md','README.md');f.copyFileSync('../../LICENSE','LICENSE')\""
   },
   "dependencies": {
-    "@skillboard/core": "^0.1.0",
-    "@skillboard/server": "^0.1.0",
+    "@ai-skillboard/core": "^0.1.0",
+    "@ai-skillboard/server": "^0.1.0",
     "commander": "^12.1.0",
     "open": "^10.1.0",
     "picocolors": "^1.1.1",

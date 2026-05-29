@@ -1,4 +1,4 @@
-import { scan, type Skill } from '@skillboard/core';
+import { scan, type Skill } from '@ai-skillboard/core';
 
 export interface ResolveOptions {
   agent?: string;

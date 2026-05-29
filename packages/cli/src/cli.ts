@@ -21,8 +21,8 @@ import {
   type MergePlanItem,
   type Scope,
   type Skill,
-} from '@skillboard/core';
-import { buildServer } from '@skillboard/server';
+} from '@ai-skillboard/core';
+import { buildServer } from '@ai-skillboard/server';
 import { resolveSkill } from './resolve.js';
 
 const VALID_AGENTS: AgentId[] = ['agents', 'claude-code', 'cursor', 'openclaw', 'codex'];
@@ -31,7 +31,7 @@ const VALID_SCOPES: Scope[] = ['user', 'project', 'workspace', 'system'];
 const program = new Command();
 
 program
-  .name('skillboard')
+  .name('ai-skillboard')
   .description('Unified skill manager across Claude Code, Cursor, openclaw, and Codex')
   .version('0.0.1');
 
@@ -192,7 +192,7 @@ program
           ).id;
     const history = await getHistory(skillId);
     if (history.length === 0) {
-      process.stdout.write(pc.dim('(no history yet — run `skillboard snapshot` first)\n'));
+      process.stdout.write(pc.dim('(no history yet — run `ai-skillboard snapshot` first)\n'));
       return;
     }
     const limit = Math.max(1, Number.parseInt(opts.limit, 10) || 30);

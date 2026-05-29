@@ -29,7 +29,7 @@ Then open <http://127.0.0.1:7300> in a browser. The CLI flag `--no-open` skips t
 Once published, you'll be able to run it without cloning:
 
 ```bash
-npx skillboard
+npx ai-skillboard
 ```
 
 (Not on npm yet — track [the issue tracker](https://github.com/laylaren/skillboard/issues) for release news.)
