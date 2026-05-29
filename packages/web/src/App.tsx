@@ -349,7 +349,7 @@ function Sidebar({
   total,
 }: SidebarProps) {
   const t = useT();
-  const agents: string[] = ['claude-code', 'cursor', 'openclaw', 'codex'];
+  const agents: string[] = ['agents', 'claude-code', 'cursor', 'openclaw', 'codex'];
 
   return (
     <aside className="sidebar">
@@ -1135,6 +1135,20 @@ function ConflictModal({ name, plan, onClose, onMerged, onError }: ConflictModal
     }
   };
 
+  // Converge into `.agents`: relocate the winning content into the canonical
+  // root and symlink every existing copy at it. Only offered when no candidate
+  // already lives in `.agents` — otherwise "Use (canonical)" already does this.
+  const doConverge = async (winnerRealPath?: string) => {
+    setLoading(true);
+    try {
+      await api.mergeToCanonical(name, winnerRealPath);
+      await onMerged();
+    } catch (err) {
+      onError(`converge failed: ${(err as Error).message}`);
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal modal-wide" onClick={(e) => e.stopPropagation()}>
@@ -1206,6 +1220,22 @@ function ConflictModal({ name, plan, onClose, onMerged, onError }: ConflictModal
               })}
             </button>
           ))}
+          {plan && !plan.hasCanonicalCandidate &&
+            (plan.contentsIdentical ? (
+              <button className="primary" disabled={loading} onClick={() => doConverge()}>
+                {t('conflictModal.convergeToAgents')}
+              </button>
+            ) : (
+              candidates.map((c, idx) => (
+                <button
+                  key={`converge-${c.realPath}`}
+                  disabled={loading}
+                  onClick={() => doConverge(c.realPath)}
+                >
+                  {t('conflictModal.convergeCandidate', { letter: String.fromCharCode(65 + idx) })}
+                </button>
+              ))
+            ))}
         </div>
       </div>
     </div>

@@ -72,6 +72,11 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ winnerRealPath }),
     }),
+  mergeToCanonical: (name: string, winnerRealPath?: string) =>
+    req(`/api/merge/${encodeURIComponent(name)}/to-canonical`, {
+      method: 'POST',
+      body: JSON.stringify({ winnerRealPath }),
+    }),
   mergeSafeAll: () => req<{ merged: { name: string; winner: string; replaced: number }[] }>(
     '/api/merge/safe-all',
     { method: 'POST' },

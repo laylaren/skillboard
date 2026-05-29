@@ -1,5 +1,5 @@
-import { dirname, basename, relative } from 'node:path';
-import { symlink, unlink, lstat } from 'node:fs/promises';
+import { dirname, basename, relative, join } from 'node:path';
+import { symlink, unlink, lstat, cp, mkdir, realpath } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import type { Skill } from '../types.js';
 import { scan } from '../scanner.js';
@@ -127,43 +127,9 @@ export async function mergeSkill(name: string, opts: MergeOneOptions = {}): Prom
 
   const replacements: MergeReplacement[] = [];
 
-  // --- 3. For each loser candidate ---
+  // --- 3. For each loser candidate, point it at the winner's realPath ---
   for (const loser of losers) {
-    // 3a. First, replace every symlink member that lives OUTSIDE the loser's
-    //     realPath with a fresh symlink pointing at the winner's realPath.
-    //     (These don't depend on the loser's realPath, so we do them first.)
-    const symlinkMembers = loser.members.filter((m) => m.realPath !== m.path);
-    for (const member of symlinkMembers) {
-      const rep = await replaceWithSymlink(member, winner.realPath);
-      replacements.push(rep);
-    }
-
-    // 3b. Handle "the original member" — i.e. an entry whose `path === realPath`.
-    //     There should be at most one such member per loser candidate. We move
-    //     its directory to trash, then recreate a symlink in its place.
-    const directMembers = loser.members.filter((m) => m.realPath === m.path);
-    if (directMembers.length === 0) {
-      // Nobody owns this loser directly — it's a stray realPath. Trash it.
-      const trash = await moveToTrash(loser.realPath, opts.home);
-      replacements.push({
-        skill: loser.members[0]!,
-        trash,
-        symlinkAt: loser.realPath,
-        pointsTo: winner.realPath,
-      });
-      await symlink(winner.realPath, loser.realPath);
-    } else {
-      for (const member of directMembers) {
-        const trash = await moveToTrash(member.path, opts.home);
-        await symlink(winner.realPath, member.path);
-        replacements.push({
-          skill: member,
-          trash,
-          symlinkAt: member.path,
-          pointsTo: winner.realPath,
-        });
-      }
-    }
+    await relocateCandidate(loser, winner.realPath, replacements, opts.home);
   }
 
   await appendLog(
@@ -208,6 +174,171 @@ async function replaceWithSymlink(member: Skill, winnerRealPath: string): Promis
     symlinkAt: member.path,
     pointsTo: winnerRealPath,
   };
+}
+
+/**
+ * Repoint a single conflict candidate at `winnerRealPath`: every member of the
+ * candidate ends up as a symlink to the winner, and the candidate's own
+ * physical directory is moved to trash. Members whose `path` already IS
+ * `winnerRealPath` (i.e. the winner lives here) are left untouched — we never
+ * symlink a directory onto itself.
+ */
+async function relocateCandidate(
+  cand: MergeCandidate,
+  winnerRealPath: string,
+  replacements: MergeReplacement[],
+  home?: string,
+): Promise<void> {
+  // First, repoint every symlink member that lives OUTSIDE the candidate's
+  // realPath. (These don't depend on the candidate's realPath, so do them first.)
+  const symlinkMembers = cand.members.filter((m) => m.realPath !== m.path && m.path !== winnerRealPath);
+  for (const member of symlinkMembers) {
+    replacements.push(await replaceWithSymlink(member, winnerRealPath));
+  }
+
+  // Then the "original" members — entries whose `path === realPath`. Move each
+  // directory to trash and recreate a symlink in its place.
+  const directMembers = cand.members.filter((m) => m.realPath === m.path && m.path !== winnerRealPath);
+  if (directMembers.length === 0) {
+    // Nobody owns this candidate directly — stray realPath. Trash it, unless it
+    // IS the winner's directory (when converging in place).
+    if (cand.realPath === winnerRealPath) return;
+    const trash = await moveToTrash(cand.realPath, home);
+    replacements.push({
+      skill: cand.members[0]!,
+      trash,
+      symlinkAt: cand.realPath,
+      pointsTo: winnerRealPath,
+    });
+    await symlink(winnerRealPath, cand.realPath);
+  } else {
+    for (const member of directMembers) {
+      const trash = await moveToTrash(member.path, home);
+      await symlink(winnerRealPath, member.path);
+      replacements.push({
+        skill: member,
+        trash,
+        symlinkAt: member.path,
+        pointsTo: winnerRealPath,
+      });
+    }
+  }
+}
+
+/**
+ * Converge a conflict into the canonical root (`~/.agents/skills/<name>`).
+ *
+ * Unlike `mergeSkill` — which keeps the winner's content wherever it already
+ * lives — this RELOCATES the winning content into `.agents/skills` and turns
+ * every existing copy (including the winner's old location) into a symlink
+ * pointing at the new canonical directory. Use it when no candidate yet lives
+ * in `.agents` and you want the conflict resolved there.
+ *
+ * Winner selection:
+ *   - `winnerRealPath` given → that candidate's content becomes canonical.
+ *   - omitted + contents identical → any candidate works (canonical/newest first).
+ *   - omitted + contents differ → error; the caller must pick.
+ */
+export async function mergeSkillToCanonical(
+  name: string,
+  opts: MergeOneOptions = {},
+): Promise<MergeResult> {
+  const home = opts.home ?? homedir();
+  const canonicalRoot = opts.canonicalRoot ?? defaultCanonical(home);
+  const plan = await findPlan(name, { ...opts, home, canonicalRoot });
+
+  if (plan.candidates.some((c) => c.members.some((m) => m.readOnly))) {
+    throw new Error(
+      `cannot merge "${name}": at least one candidate is read-only (plugin-bundled)`,
+    );
+  }
+
+  // --- 1. Decide whose content becomes canonical ---
+  let winner: MergeCandidate;
+  if (opts.winnerRealPath) {
+    const found = plan.candidates.find((c) => c.realPath === opts.winnerRealPath);
+    if (!found) {
+      throw new Error(
+        `winnerRealPath ${opts.winnerRealPath} does not match any candidate for "${name}"`,
+      );
+    }
+    winner = found;
+  } else if (plan.contentsIdentical) {
+    winner = plan.canonicalWinner ?? plan.newestWinner ?? plan.candidates[0]!;
+  } else {
+    throw new Error(
+      `cannot converge "${name}" into canonical: contents differ between candidates. ` +
+        `Call again with an explicit winnerRealPath.`,
+    );
+  }
+
+  // Resolve the canonical target path. `realpath` keeps us consistent with the
+  // already-canonicalized candidate realPaths (e.g. /tmp vs /private/tmp).
+  const canonicalRootReal = await realpath(canonicalRoot).catch(() => canonicalRoot);
+  const target = join(canonicalRootReal, name);
+
+  // If the winner already lives at the canonical target, there's nothing to
+  // relocate — fall back to a plain merge with that winner.
+  if (winner.realPath === target) {
+    return mergeSkill(name, { ...opts, winnerRealPath: winner.realPath, home, canonicalRoot });
+  }
+
+  // --- 2. Snapshot everything we're about to disturb ---
+  for (const cand of plan.candidates) {
+    for (const m of cand.members) {
+      await snapshotSkill(m, {
+        trigger: 'manual-snapshot',
+        userNote: `pre-converge → ${target}`,
+        home,
+      });
+    }
+  }
+
+  // --- 3. Materialize the winner's content at the canonical target ---
+  await mkdir(canonicalRootReal, { recursive: true });
+  const existing = await lstat(target).catch(() => null);
+  if (existing) {
+    const isCandidate = plan.candidates.some((c) => c.realPath === target);
+    if (!isCandidate) {
+      throw new Error(
+        `cannot converge "${name}": ${target} already exists and is not part of this conflict`,
+      );
+    }
+    // A candidate already sits at the target but isn't the chosen winner — trash
+    // it so we can drop the winner's content there instead.
+    await moveToTrash(target, home);
+  }
+  await cp(winner.realPath, target, { recursive: true });
+
+  // --- 4. Turn every candidate into a symlink pointing at the canonical dir ---
+  const replacements: MergeReplacement[] = [];
+  for (const cand of plan.candidates) {
+    await relocateCandidate(cand, target, replacements, home);
+  }
+
+  // The returned "winner" reflects the new canonical location.
+  const canonicalWinner: MergeCandidate = {
+    ...winner,
+    realPath: target,
+    inCanonicalRoot: true,
+  };
+
+  await appendLog(
+    {
+      action: 'merge',
+      skillId: name,
+      detail: {
+        strategy: 'converge-to-canonical',
+        target,
+        contentFrom: winner.realPath,
+        candidates: plan.candidates.map((c) => c.realPath),
+        replacements: replacements.map((r) => ({ at: r.symlinkAt, trash: r.trash.trashPath })),
+      },
+    },
+    home,
+  );
+
+  return { name, winner: canonicalWinner, replacements, noop: false };
 }
 
 /**
