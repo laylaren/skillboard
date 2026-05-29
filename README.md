@@ -2,6 +2,10 @@
 
 > A local dashboard for inspecting and managing skills across Claude Code, Codex, Cursor, and openclaw — in one place.
 
+[![npm](https://img.shields.io/npm/v/@laylaren/skillboard?color=cb3837&logo=npm)](https://www.npmjs.com/package/@laylaren/skillboard)
+[![node](https://img.shields.io/node/v/@laylaren/skillboard)](https://www.npmjs.com/package/@laylaren/skillboard)
+[![license](https://img.shields.io/npm/l/@laylaren/skillboard)](./LICENSE)
+
 [简体中文](./README.zh-CN.md)
 
 ![skillboard dashboard](./docs/screenshot.png)
@@ -26,13 +30,19 @@ Then open <http://127.0.0.1:7300> in a browser. The CLI flag `--no-open` skips t
 
 ## Install via npm
 
-Once published, you'll be able to run it without cloning:
+Run it without cloning:
 
 ```bash
-npx @laylaren/skillboard
+npx @laylaren/skillboard          # starts the dashboard at http://127.0.0.1:7300
 ```
 
-(Not on npm yet — track [the issue tracker](https://github.com/laylaren/skillboard/issues) for release news.)
+Or install the `skillboard` command globally:
+
+```bash
+npm install -g @laylaren/skillboard
+skillboard serve                  # dashboard
+skillboard ls                     # list skills in the terminal
+```
 
 ## Supported agents
 

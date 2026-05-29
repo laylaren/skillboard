@@ -2,6 +2,10 @@
 
 > 一个本地仪表盘，把散落在 Claude Code / Codex / Cursor / openclaw 中的 skills 统一管起来。
 
+[![npm](https://img.shields.io/npm/v/@laylaren/skillboard?color=cb3837&logo=npm)](https://www.npmjs.com/package/@laylaren/skillboard)
+[![node](https://img.shields.io/node/v/@laylaren/skillboard)](https://www.npmjs.com/package/@laylaren/skillboard)
+[![license](https://img.shields.io/npm/l/@laylaren/skillboard)](./LICENSE)
+
 [English](./README.md)
 
 ![skillboard dashboard](./docs/screenshot.png)
@@ -26,13 +30,19 @@ npm run serve    # → ✓ skillboard dashboard at http://127.0.0.1:7300
 
 ## 通过 npm 安装
 
-发布后可以直接：
+免 clone 直接运行：
 
 ```bash
-npx @laylaren/skillboard
+npx @laylaren/skillboard          # 在 http://127.0.0.1:7300 启动仪表盘
 ```
 
-（暂未发布 npm，跟踪 [issue tracker](https://github.com/laylaren/skillboard/issues) 获取发布消息。）
+或全局安装 `skillboard` 命令：
+
+```bash
+npm install -g @laylaren/skillboard
+skillboard serve                  # 启动仪表盘
+skillboard ls                     # 在终端列出 skills
+```
 
 ## 支持的 Agent
 
