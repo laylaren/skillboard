@@ -21,17 +21,17 @@ import {
   type MergePlanItem,
   type Scope,
   type Skill,
-} from '@one-skill/core';
-import { buildServer } from '@one-skill/server';
+} from '@skillboard/core';
+import { buildServer } from '@skillboard/server';
 import { resolveSkill } from './resolve.js';
 
-const VALID_AGENTS: AgentId[] = ['claude-code', 'cursor', 'openclaw', 'codex'];
+const VALID_AGENTS: AgentId[] = ['agents', 'claude-code', 'cursor', 'openclaw', 'codex'];
 const VALID_SCOPES: Scope[] = ['user', 'project', 'workspace', 'system'];
 
 const program = new Command();
 
 program
-  .name('one-skill')
+  .name('skillboard')
   .description('Unified skill manager across Claude Code, Cursor, openclaw, and Codex')
   .version('0.0.1');
 
@@ -132,7 +132,7 @@ program
 
 program
   .command('remove <skill>')
-  .description('Remove a skill (moved to ~/.one-skill/trash, can be restored)')
+  .description('Remove a skill (moved to ~/.skillboard/trash, can be restored)')
   .option('-a, --agent <agent>', 'disambiguate by agent')
   .option('-s, --scope <scope>', 'disambiguate by scope')
   .action(async (skillInput, opts) => {
@@ -192,7 +192,7 @@ program
           ).id;
     const history = await getHistory(skillId);
     if (history.length === 0) {
-      process.stdout.write(pc.dim('(no history yet — run `one-skill snapshot` first)\n'));
+      process.stdout.write(pc.dim('(no history yet — run `skillboard snapshot` first)\n'));
       return;
     }
     const limit = Math.max(1, Number.parseInt(opts.limit, 10) || 30);
@@ -266,7 +266,7 @@ program
     const app = await buildServer({ cwd: process.cwd() });
     await app.listen({ host: '127.0.0.1', port });
     const url = `http://127.0.0.1:${port}`;
-    process.stdout.write(pc.green(`✓ one-skill dashboard at ${url}\n`));
+    process.stdout.write(pc.green(`✓ skillboard dashboard at ${url}\n`));
     if (opts.open !== false) {
       open(url).catch(() => {
         process.stdout.write(pc.dim(`(could not auto-open browser; visit ${url} manually)\n`));

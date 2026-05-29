@@ -1,17 +1,17 @@
 {
-  "name": "@one-skill/core",
+  "name": "@skillboard/core",
   "version": "0.1.0",
-  "description": "Core scanner, adapters, and version-management primitives for one-skill.",
+  "description": "Core scanner, adapters, and version-management primitives for skillboard.",
   "license": "MIT",
   "author": "",
-  "homepage": "https://github.com/<your-github>/one-skill#readme",
+  "homepage": "https://github.com/<your-github>/skillboard#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<your-github>/one-skill.git",
+    "url": "git+https://github.com/<your-github>/skillboard.git",
     "directory": "packages/core"
   },
   "bugs": {
-    "url": "https://github.com/<your-github>/one-skill/issues"
+    "url": "https://github.com/<your-github>/skillboard/issues"
   },
   "keywords": [
     "claude-code",

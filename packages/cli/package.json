@@ -1,17 +1,17 @@
 {
-  "name": "one-skill",
+  "name": "skillboard",
   "version": "0.1.0",
   "description": "Local dashboard for inspecting and managing Claude Code / Codex / Cursor / openclaw skills.",
   "license": "MIT",
   "author": "",
-  "homepage": "https://github.com/<your-github>/one-skill#readme",
+  "homepage": "https://github.com/<your-github>/skillboard#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<your-github>/one-skill.git",
+    "url": "git+https://github.com/<your-github>/skillboard.git",
     "directory": "packages/cli"
   },
   "bugs": {
-    "url": "https://github.com/<your-github>/one-skill/issues"
+    "url": "https://github.com/<your-github>/skillboard/issues"
   },
   "keywords": [
     "claude-code",
@@ -33,7 +33,7 @@
   },
   "type": "module",
   "bin": {
-    "one-skill": "./bin/one-skill.mjs"
+    "skillboard": "./bin/skillboard.mjs"
   },
   "files": [
     "bin/",
@@ -45,8 +45,8 @@
     "prepack": "node -e \"const f=require('node:fs');f.copyFileSync('../../README.md','README.md');f.copyFileSync('../../LICENSE','LICENSE')\""
   },
   "dependencies": {
-    "@one-skill/core": "^0.1.0",
-    "@one-skill/server": "^0.1.0",
+    "@skillboard/core": "^0.1.0",
+    "@skillboard/server": "^0.1.0",
     "commander": "^12.1.0",
     "open": "^10.1.0",
     "picocolors": "^1.1.1",

@@ -1,4 +1,4 @@
-export type AgentId = 'claude-code' | 'cursor' | 'openclaw' | 'codex';
+export type AgentId = 'agents' | 'claude-code' | 'cursor' | 'openclaw' | 'codex';
 
 /**
  * Logical scope of a skill. `user` / `project` cover claude-code, cursor, codex
@@ -106,7 +106,7 @@ export interface ScanOptions {
   /**
    * Explicit list of project roots to scan. When provided, the cwd-based
    * adapters (claude-code, cursor, codex) emit one project-scope-root per
-   * entry. When unset, the scanner reads `~/.one-skill/projects.json`.
+   * entry. When unset, the scanner reads `~/.skillboard/projects.json`.
    * Pass an empty array to suppress project-scope scanning entirely.
    */
   projectRoots?: { path: string; label: string }[];

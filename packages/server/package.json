@@ -1,17 +1,17 @@
 {
-  "name": "@one-skill/server",
+  "name": "@skillboard/server",
   "version": "0.1.0",
-  "description": "Fastify backend for one-skill: REST API + static SPA host.",
+  "description": "Fastify backend for skillboard: REST API + static SPA host.",
   "license": "MIT",
   "author": "",
-  "homepage": "https://github.com/<your-github>/one-skill#readme",
+  "homepage": "https://github.com/<your-github>/skillboard#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<your-github>/one-skill.git",
+    "url": "git+https://github.com/<your-github>/skillboard.git",
     "directory": "packages/server"
   },
   "bugs": {
-    "url": "https://github.com/<your-github>/one-skill/issues"
+    "url": "https://github.com/<your-github>/skillboard/issues"
   },
   "keywords": [
     "claude-code",
@@ -46,7 +46,7 @@
   "dependencies": {
     "@fastify/cors": "^10.0.1",
     "@fastify/static": "^8.0.3",
-    "@one-skill/core": "^0.1.0",
+    "@skillboard/core": "^0.1.0",
     "fastify": "^5.2.0"
   }
 }

@@ -11,7 +11,7 @@ interface WatchEntry {
 export interface SkillWatcherOptions {
   /** Override the debounce window between the last fs event and the snapshot. */
   debounceMs?: number;
-  /** Override `~/.one-skill/` home when persisting. */
+  /** Override `~/.skillboard/` home when persisting. */
   home?: string;
   /** Notified after a successful auto-snapshot (used by the server to push UI updates / logs). */
   onSnapshot?: (skill: Skill, result: SnapshotResult) => void;

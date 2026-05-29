@@ -13,7 +13,7 @@ export interface MigrationResult {
  * (`project` → `workspace`, `user` → `system`). Idempotent: if the source dir
  * doesn't exist or the target already exists, the entry is skipped.
  *
- * Only touches dirs under `~/.one-skill/versions/`. The actual skill files on
+ * Only touches dirs under `~/.skillboard/versions/`. The actual skill files on
  * disk aren't affected — scope is purely a logical tag baked into the skill id.
  */
 export async function migrateOpenclawScopeNames(home?: string): Promise<MigrationResult> {

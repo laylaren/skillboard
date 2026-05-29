@@ -1,5 +1,5 @@
 {
-  "brand": "one-skill",
+  "brand": "skillboard",
   "brand.skillCount": "{n} skills",
 
   "sidebar.agents": "Agents",
@@ -59,7 +59,7 @@
   "detail.snapshotIntro": "Capture the current state as a version snapshot for future diffs / rollbacks.",
   "detail.snapshotPlaceholder": "e.g. cleaned up references/ structure",
   "detail.snapshotSave": "Save snapshot",
-  "detail.removeConfirm": "Remove {id}? (moved to ~/.one-skill/trash, recoverable)",
+  "detail.removeConfirm": "Remove {id}? (moved to ~/.skillboard/trash, recoverable)",
   "detail.removeTitle": "Remove skill",
   "detail.rollbackConfirm": "Rollback {name} to {sha}?",
   "detail.rollbackTitle": "Restore this version",
@@ -103,6 +103,8 @@
   "conflictModal.useCandidate": "Use {letter} ({label})",
   "conflictModal.canonical": "canonical",
   "conflictModal.nonCanonical": "non-canonical",
+  "conflictModal.convergeToAgents": "Converge into .agents",
+  "conflictModal.convergeCandidate": "Converge {letter} into .agents",
   "conflictModal.summary.same": "same {n}",
   "conflictModal.summary.changed": "changed {n}",
   "conflictModal.summary.onlyInA": "only in A {n}",
@@ -113,7 +115,7 @@
 
   "safeMerge.title": "Auto-merge {n} conflicts",
   "safeMerge.tag": "contents identical",
-  "safeMerge.body": "For each skill below, the copy in {root} is kept as the single source of truth. All other physical copies are moved to ~/.one-skill/trash, and the original locations are replaced with symlinks pointing at the canonical file. (Snapshots are taken before any change.)",
+  "safeMerge.body": "For each skill below, the copy in {root} is kept as the single source of truth. All other physical copies are moved to ~/.skillboard/trash, and the original locations are replaced with symlinks pointing at the canonical file. (Snapshots are taken before any change.)",
   "safeMerge.keep": "keep",
   "safeMerge.canonicalUntouched": "(canonical, untouched)",
   "safeMerge.alreadyLinked": "already linked here:",
@@ -122,7 +124,7 @@
   "safeMerge.target": "target: {from} → {to}",
   "safeMerge.replaceDetail": "the directory is moved to trash, then re-created as a symlink to {path}",
   "safeMerge.trash": "trash",
-  "safeMerge.trashHint": "(physical dir, orphaned after retarget; recoverable from ~/.one-skill/trash)",
+  "safeMerge.trashHint": "(physical dir, orphaned after retarget; recoverable from ~/.skillboard/trash)",
   "safeMerge.cancel": "Cancel",
   "safeMerge.confirm": "Merge {n} {plural} →",
   "safeMerge.skill": "skill",

@@ -19,6 +19,7 @@ import {
   getHistory,
   analyzeMerge,
   mergeSkill,
+  mergeSkillToCanonical,
   mergeAllSafe,
   getMergeDiff,
   defaultCanonicalRoot,
@@ -32,12 +33,12 @@ import {
   findProjectCandidates,
   SkillWatcher,
   type Skill,
-} from '@one-skill/core';
+} from '@skillboard/core';
 
 const here = dirname(fileURLToPath(import.meta.url));
 /**
  * Where the built SPA lives. Two layouts to support:
- *   - Published `@one-skill/server` tarball: `web-dist/` sits next to `src/`
+ *   - Published `@skillboard/server` tarball: `web-dist/` sits next to `src/`
  *     (populated by the package's `prepublishOnly` script).
  *   - Monorepo dev tree: built SPA lives at `packages/web/dist/`.
  * Pick whichever exists at module load; fall back to the monorepo path so the
@@ -143,7 +144,7 @@ export async function buildServer(opts: BuildServerOptions = {}): Promise<Fastif
   const app = Fastify({ logger: false });
   await app.register(fastifyCors, { origin: true });
 
-  // Bootstrap the projects list: if there's no `~/.one-skill/projects.json` yet,
+  // Bootstrap the projects list: if there's no `~/.skillboard/projects.json` yet,
   // seed it with the server's cwd (if it looks like a project) so users
   // upgrading don't lose access to their existing project-scope skills.
   const boot = await bootstrapProjects(cwd);
@@ -177,7 +178,7 @@ export async function buildServer(opts: BuildServerOptions = {}): Promise<Fastif
   // Watches every writable skill's physical dir and snapshots on external
   // edits. Re-synced after every mutating endpoint (action paths may change),
   // and on a 30s timer to pick up brand-new skills that appear on disk
-  // without going through one-skill's own action endpoints.
+  // without going through skillboard's own action endpoints.
   const watcher = new SkillWatcher({
     onSnapshot: (skill, result) => {
       if (result.changed) {
@@ -417,6 +418,21 @@ export async function buildServer(opts: BuildServerOptions = {}): Promise<Fastif
     },
   );
 
+  app.post<{ Params: { name: string }; Body: { winnerRealPath?: string } }>(
+    '/api/merge/:name/to-canonical',
+    async (req, reply) => {
+      try {
+        const result = await mergeSkillToCanonical(decodeURIComponent(req.params.name), {
+          winnerRealPath: req.body?.winnerRealPath,
+        });
+        await syncWatcher();
+        return result;
+      } catch (err) {
+        return reply.code(400).send({ error: (err as Error).message });
+      }
+    },
+  );
+
   app.post('/api/merge/safe-all', async () => {
     const results = await mergeAllSafe();
     await syncWatcher();
@@ -443,8 +459,8 @@ export async function buildServer(opts: BuildServerOptions = {}): Promise<Fastif
       return reply
         .type('text/html')
         .send(
-          `<!doctype html><meta charset="utf-8"><title>one-skill</title><body style="font-family:system-ui;padding:2rem;max-width:60ch;line-height:1.5">
-<h1>one-skill</h1>
+          `<!doctype html><meta charset="utf-8"><title>skillboard</title><body style="font-family:system-ui;padding:2rem;max-width:60ch;line-height:1.5">
+<h1>skillboard</h1>
 <p>The SPA bundle hasn't been built yet. Run:</p>
 <pre>npm run web:build</pre>
 <p>then restart the server. Meanwhile, the API is live at <a href="/api/skills">/api/skills</a>.</p></body>`,

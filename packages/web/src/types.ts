@@ -1,7 +1,7 @@
 // Mirror of the core's public types — kept locally so the web bundle doesn't
 // drag in the core runtime deps. Keep in sync with packages/core/src/types.ts.
 
-export type AgentId = 'claude-code' | 'cursor' | 'openclaw' | 'codex';
+export type AgentId = 'agents' | 'claude-code' | 'cursor' | 'openclaw' | 'codex';
 export type Scope = 'user' | 'project' | 'workspace' | 'system';
 
 export interface Skill {

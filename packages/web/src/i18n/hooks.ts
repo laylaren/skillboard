@@ -9,7 +9,7 @@ const MESSAGES: Record<Locale, Record<string, string>> = {
   zh: zh as Record<string, string>,
 };
 
-const STORAGE_KEY = 'one-skill-locale';
+const STORAGE_KEY = 'skillboard-locale';
 
 interface LocaleContextValue {
   locale: Locale;

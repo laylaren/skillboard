@@ -28,8 +28,8 @@ export async function getSkillRepo(skillId: string, home?: string): Promise<Skil
   if (!(await exists(join(repoDir, '.git')))) {
     await mkdir(workDir, { recursive: true });
     await git(['init', '-q', '-b', 'main'], repoDir);
-    await git(['config', 'user.email', 'one-skill@localhost'], repoDir);
-    await git(['config', 'user.name', 'one-skill'], repoDir);
+    await git(['config', 'user.email', 'skillboard@localhost'], repoDir);
+    await git(['config', 'user.name', 'skillboard'], repoDir);
     // Seed commit so HEAD always exists, even before the first snapshot.
     await git(['commit', '--allow-empty', '-q', '-m', 'init'], repoDir);
   }

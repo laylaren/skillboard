@@ -50,8 +50,8 @@ const PRUNE_DIRS = new Set([
   'venv',
   '.venv',
   '__pycache__',
-  // one-skill's own bookkeeping (so it doesn't recurse into itself)
-  '.one-skill',
+  // skillboard's own bookkeeping (so it doesn't recurse into itself)
+  '.skillboard',
   // Agent dirs themselves — we look for `<root>/.claude/skills`, never descend into `.claude`
   '.claude',
   '.cursor',

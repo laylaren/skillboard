@@ -1,5 +1,5 @@
 {
-  "brand": "one-skill",
+  "brand": "skillboard",
   "brand.skillCount": "{n} 个 skill",
 
   "sidebar.agents": "Agents",
@@ -59,7 +59,7 @@
   "detail.snapshotIntro": "为当前状态打一个版本快照，方便后续对比或回滚。",
   "detail.snapshotPlaceholder": "比如：调整了 reference 文档结构",
   "detail.snapshotSave": "保存快照",
-  "detail.removeConfirm": "确认移除 {id}？（移动到 ~/.one-skill/trash，可恢复）",
+  "detail.removeConfirm": "确认移除 {id}？（移动到 ~/.skillboard/trash，可恢复）",
   "detail.removeTitle": "移除 skill",
   "detail.rollbackConfirm": "确认把 {name} 回滚到 {sha}？",
   "detail.rollbackTitle": "恢复到这个版本",
@@ -103,6 +103,8 @@
   "conflictModal.useCandidate": "用 {letter}（{label}）",
   "conflictModal.canonical": "canonical",
   "conflictModal.nonCanonical": "非 canonical",
+  "conflictModal.convergeToAgents": "收敛到 .agents",
+  "conflictModal.convergeCandidate": "用 {letter} 收敛到 .agents",
   "conflictModal.summary.same": "相同 {n}",
   "conflictModal.summary.changed": "修改 {n}",
   "conflictModal.summary.onlyInA": "仅 A 有 {n}",
@@ -113,7 +115,7 @@
 
   "safeMerge.title": "自动合并 {n} 个冲突",
   "safeMerge.tag": "内容完全相同",
-  "safeMerge.body": "下面的每个 skill，{root} 里的副本会被保留为唯一源。其它物理副本会移到 ~/.one-skill/trash，原位置替换为指向 canonical 的 symlink。（操作前会先 snapshot。）",
+  "safeMerge.body": "下面的每个 skill，{root} 里的副本会被保留为唯一源。其它物理副本会移到 ~/.skillboard/trash，原位置替换为指向 canonical 的 symlink。（操作前会先 snapshot。）",
   "safeMerge.keep": "保留",
   "safeMerge.canonicalUntouched": "（canonical，不动）",
   "safeMerge.alreadyLinked": "已经指向这里:",
@@ -122,7 +124,7 @@
   "safeMerge.target": "目标: {from} → {to}",
   "safeMerge.replaceDetail": "目录移到 trash，然后在原位置重建为指向 {path} 的 symlink",
   "safeMerge.trash": "扔进 trash",
-  "safeMerge.trashHint": "（物理目录，重定向之后变成孤儿；可从 ~/.one-skill/trash 恢复）",
+  "safeMerge.trashHint": "（物理目录，重定向之后变成孤儿；可从 ~/.skillboard/trash 恢复）",
   "safeMerge.cancel": "取消",
   "safeMerge.confirm": "合并 {n} 个 {plural} →",
   "safeMerge.skill": "skill",

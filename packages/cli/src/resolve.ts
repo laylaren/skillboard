@@ -1,4 +1,4 @@
-import { scan, type Skill } from '@one-skill/core';
+import { scan, type Skill } from '@skillboard/core';
 
 export interface ResolveOptions {
   agent?: string;

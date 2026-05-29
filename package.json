@@ -1,16 +1,16 @@
 {
-  "name": "one-skill-monorepo",
+  "name": "skillboard-monorepo",
   "version": "0.1.0",
-  "description": "Monorepo root for one-skill — a local dashboard for managing skills across Claude Code, Codex, Cursor, and openclaw.",
+  "description": "Monorepo root for skillboard — a local dashboard for managing skills across Claude Code, Codex, Cursor, and openclaw.",
   "license": "MIT",
   "author": "",
-  "homepage": "https://github.com/<your-github>/one-skill#readme",
+  "homepage": "https://github.com/<your-github>/skillboard#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<your-github>/one-skill.git"
+    "url": "git+https://github.com/<your-github>/skillboard.git"
   },
   "bugs": {
-    "url": "https://github.com/<your-github>/one-skill/issues"
+    "url": "https://github.com/<your-github>/skillboard/issues"
   },
   "engines": {
     "node": ">=20"
@@ -22,8 +22,8 @@
   ],
   "scripts": {
     "cli": "tsx packages/cli/src/cli.ts",
-    "web:build": "npm --workspace=@one-skill/web run build",
-    "web:dev": "npm --workspace=@one-skill/web run dev",
+    "web:build": "npm --workspace=@skillboard/web run build",
+    "web:dev": "npm --workspace=@skillboard/web run dev",
     "serve": "tsx packages/cli/src/cli.ts serve",
     "typecheck": "tsc -b",
     "prepare": "npm run web:build --if-present"

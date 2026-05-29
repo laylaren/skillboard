@@ -1,25 +1,25 @@
-# one-skill
+# skillboard
 
 > 一个本地仪表盘，把散落在 Claude Code / Codex / Cursor / openclaw 中的 skills 统一管起来。
 
 [English](./README.md)
 
-![one-skill dashboard](./docs/screenshot.png)
+![skillboard dashboard](./docs/screenshot.png)
 
 ## 它能做什么
 
 - **跨 Agent 清单**——一次性扫描 `~/.claude/skills`、`~/.codex/pets`、`~/.cursor/skills-cursor`、`~/.openclaw/skills`，以及你授权的项目级 `.claude/skills/` 目录。
 - **识别重复和阴影**——同名 skill 出现在多个 Agent 或多个作用域时，告诉你"哪一份真正被加载"，哪些是分叉副本。
 - **安全合并**——内容完全相同的冲突，一键收敛为单一规范源（其余位置替换为 symlink），垃圾桶可撤销。
-- **版本历史开箱即用**——每次外部编辑、安装、启用、停用、手动快照都会落到 `~/.one-skill/versions/` 下每个 skill 一个 git repo，一键回滚。
+- **版本历史开箱即用**——每次外部编辑、安装、启用、停用、手动快照都会落到 `~/.skillboard/versions/` 下每个 skill 一个 git repo，一键回滚。
 
 ## 快速开始
 
 ```bash
-git clone https://github.com/<your-github>/one-skill.git
-cd one-skill
+git clone https://github.com/<your-github>/skillboard.git
+cd skillboard
 npm install      # `prepare` 钩子会自动构建 SPA
-npm run serve    # → ✓ one-skill dashboard at http://127.0.0.1:7300
+npm run serve    # → ✓ skillboard dashboard at http://127.0.0.1:7300
 ```
 
 浏览器打开 <http://127.0.0.1:7300>。`--no-open` 跳过自动开浏览器；`--port <n>` 改默认端口（7300）。
@@ -29,10 +29,10 @@ npm run serve    # → ✓ one-skill dashboard at http://127.0.0.1:7300
 发布后可以直接：
 
 ```bash
-npx one-skill
+npx skillboard
 ```
 
-（暂未发布 npm，跟踪 [issue tracker](https://github.com/<your-github>/one-skill/issues) 获取发布消息。）
+（暂未发布 npm，跟踪 [issue tracker](https://github.com/<your-github>/skillboard/issues) 获取发布消息。）
 
 ## 支持的 Agent
 
@@ -56,11 +56,11 @@ Claude Code 的 plugin 自带 skill（`~/.claude/plugins/cache/.../skills/`）�
 
 ## 数据存在哪
 
-所有本地状态在 `~/.one-skill/` 下：
+所有本地状态在 `~/.skillboard/` 下：
 
-- `~/.one-skill/projects.json` —— 你授权扫描的项目列表
-- `~/.one-skill/versions/` —— 每个 skill 一个的 bare git 仓库（历史）
-- `~/.one-skill/trash/` —— 移除 skill 时的兜底回收站
+- `~/.skillboard/projects.json` —— 你授权扫描的项目列表
+- `~/.skillboard/versions/` —— 每个 skill 一个的 bare git 仓库（历史）
+- `~/.skillboard/trash/` —— 移除 skill 时的兜底回收站
 
 没有遥测、除浏览器访问 `127.0.0.1` 之外没有任何网络调用、不需要账号。
 
@@ -76,8 +76,8 @@ npm run typecheck  # 全 workspace 跑 tsc -b
 
 - `packages/core` —— 扫描器、Agent 适配器、版本管理、文件监听
 - `packages/server` —— Fastify REST + 静态 SPA host
-- `packages/web` —— React SPA（构建产物在发布时夹带进 `@one-skill/server` 包）
-- `packages/cli` —— `one-skill` 二进制
+- `packages/web` —— React SPA（构建产物在发布时夹带进 `@skillboard/server` 包）
+- `packages/cli` —— `skillboard` 二进制
 
 ## 贡献
 

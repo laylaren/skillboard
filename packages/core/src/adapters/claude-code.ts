@@ -7,7 +7,7 @@ import type { Adapter } from './types.js';
  *
  * Plugin-bundled skills (under `~/.claude/plugins/**\/skills`) are intentionally
  * NOT scanned — they're owned by the plugin and managed via `/plugin`. Surfacing
- * them in one-skill just adds noise and read-only entries the user can't act on.
+ * them in skillboard just adds noise and read-only entries the user can't act on.
  */
 export const claudeCodeAdapter: Adapter = {
   agent: 'claude-code',

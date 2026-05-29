@@ -1,12 +1,12 @@
 {
-  "name": "@one-skill/web",
+  "name": "@skillboard/web",
   "version": "0.1.0",
-  "description": "React SPA front-end for one-skill (built artifact ships inside @one-skill/server).",
+  "description": "React SPA front-end for skillboard (built artifact ships inside @skillboard/server).",
   "license": "MIT",
   "author": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<your-github>/one-skill.git",
+    "url": "git+https://github.com/<your-github>/skillboard.git",
     "directory": "packages/web"
   },
   "engines": {

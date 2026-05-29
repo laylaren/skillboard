@@ -1,25 +1,25 @@
-# one-skill
+# skillboard
 
 > A local dashboard for inspecting and managing skills across Claude Code, Codex, Cursor, and openclaw — in one place.
 
 [简体中文](./README.zh-CN.md)
 
-![one-skill dashboard](./docs/screenshot.png)
+![skillboard dashboard](./docs/screenshot.png)
 
 ## What it does
 
 - **Cross-agent inventory** — scans `~/.claude/skills`, `~/.codex/pets`, `~/.cursor/skills-cursor`, `~/.openclaw/skills`, plus any per-project `.claude/skills/` directories you opt into.
 - **Spots duplicates and shadows** — when the same skill name lives in multiple agents or scopes, the dashboard tells you which copy is actually loaded and where the others differ.
 - **Safe merge** — for identical-contents conflicts, collapses copies into a single canonical source via symlinks, with full undo via the trash.
-- **Version history out of the box** — every external edit, install, enable, disable, or manual snapshot is captured in a per-skill git repo under `~/.one-skill/versions/`. Rollback in one click.
+- **Version history out of the box** — every external edit, install, enable, disable, or manual snapshot is captured in a per-skill git repo under `~/.skillboard/versions/`. Rollback in one click.
 
 ## Quick start
 
 ```bash
-git clone https://github.com/<your-github>/one-skill.git
-cd one-skill
+git clone https://github.com/<your-github>/skillboard.git
+cd skillboard
 npm install      # the `prepare` hook auto-builds the SPA bundle
-npm run serve    # → ✓ one-skill dashboard at http://127.0.0.1:7300
+npm run serve    # → ✓ skillboard dashboard at http://127.0.0.1:7300
 ```
 
 Then open <http://127.0.0.1:7300> in a browser. The CLI flag `--no-open` skips the auto-open behaviour, `--port <n>` (default 7300) lets you change the port.
@@ -29,10 +29,10 @@ Then open <http://127.0.0.1:7300> in a browser. The CLI flag `--no-open` skips t
 Once published, you'll be able to run it without cloning:
 
 ```bash
-npx one-skill
+npx skillboard
 ```
 
-(Not on npm yet — track [the issue tracker](https://github.com/<your-github>/one-skill/issues) for release news.)
+(Not on npm yet — track [the issue tracker](https://github.com/<your-github>/skillboard/issues) for release news.)
 
 ## Supported agents
 
@@ -56,11 +56,11 @@ Claude Code's plugin-bundled skills under `~/.claude/plugins/cache/.../skills/` 
 
 ## Where data is stored
 
-All of one-skill's local state lives under `~/.one-skill/`:
+All of skillboard's local state lives under `~/.skillboard/`:
 
-- `~/.one-skill/projects.json` — projects you've opted into scanning
-- `~/.one-skill/versions/` — per-skill bare git repos for history
-- `~/.one-skill/trash/` — safety net for removed skills
+- `~/.skillboard/projects.json` — projects you've opted into scanning
+- `~/.skillboard/versions/` — per-skill bare git repos for history
+- `~/.skillboard/trash/` — safety net for removed skills
 
 There is no telemetry, no network call beyond what the browser does to `127.0.0.1`, and no account.
 
@@ -76,8 +76,8 @@ The repo is an npm workspaces monorepo:
 
 - `packages/core` — scanner, adapters (one per agent), versioning, file watcher
 - `packages/server` — Fastify REST + static SPA host
-- `packages/web` — React SPA (built artifact ships inside `@one-skill/server` on publish)
-- `packages/cli` — the `one-skill` binary
+- `packages/web` — React SPA (built artifact ships inside `@skillboard/server` on publish)
+- `packages/cli` — the `skillboard` binary
 
 ## Contributing
 

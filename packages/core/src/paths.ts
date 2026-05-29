@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { mkdir } from 'node:fs/promises';
 
 /**
- * Central layout of `~/.one-skill/`. Everything we persist to disk hangs off here.
+ * Central layout of `~/.skillboard/`. Everything we persist to disk hangs off here.
  */
 export interface OneSkillPaths {
   root: string;
@@ -13,7 +13,7 @@ export interface OneSkillPaths {
 }
 
 export function resolveOneSkillPaths(home: string = homedir()): OneSkillPaths {
-  const root = join(home, '.one-skill');
+  const root = join(home, '.skillboard');
   return {
     root,
     trash: join(root, 'trash'),

@@ -136,7 +136,7 @@ export async function scan(options: ScanOptions = {}): Promise<ScanResult> {
     : null;
 
   // Resolve which project roots feed the cwd-based adapters.
-  // Caller-provided list wins; otherwise we read `~/.one-skill/projects.json`;
+  // Caller-provided list wins; otherwise we read `~/.skillboard/projects.json`;
   // legacy callers that pass nothing get the current cwd as a one-off project.
   let projectRoots: { path: string; label: string }[];
   if (options.projectRoots) {
