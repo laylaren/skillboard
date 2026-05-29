@@ -1,5 +1,6 @@
 import { homedir } from 'node:os';
 import { join } from 'node:path';
+import { createRequire } from 'node:module';
 import { Command } from 'commander';
 import pc from 'picocolors';
 import open from 'open';
@@ -25,6 +26,11 @@ import {
 import { buildServer } from '@ai-skillboard/server';
 import { resolveSkill } from './resolve.js';
 
+// Read the published version straight from package.json so `--version` can't
+// drift from the package. Works both in the monorepo (src/) and the published
+// layout, where package.json sits one level above src/.
+const { version: pkgVersion } = createRequire(import.meta.url)('../package.json') as { version: string };
+
 const VALID_AGENTS: AgentId[] = ['agents', 'claude-code', 'cursor', 'openclaw', 'codex'];
 const VALID_SCOPES: Scope[] = ['user', 'project', 'workspace', 'system'];
 
@@ -33,7 +39,7 @@ const program = new Command();
 program
   .name('ai-skillboard')
   .description('Unified skill manager across Claude Code, Cursor, openclaw, and Codex')
-  .version('0.0.1');
+  .version(pkgVersion);
 
 program
   .command('ls')
