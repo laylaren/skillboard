@@ -22,8 +22,8 @@ import {
   type MergePlanItem,
   type Scope,
   type Skill,
-} from '@ai-skillboard/core';
-import { buildServer } from '@ai-skillboard/server';
+} from '@laylaren/skillboard-core';
+import { buildServer } from '@laylaren/skillboard-server';
 import { resolveSkill } from './resolve.js';
 
 // Read the published version straight from package.json so `--version` can't
@@ -37,7 +37,7 @@ const VALID_SCOPES: Scope[] = ['user', 'project', 'workspace', 'system'];
 const program = new Command();
 
 program
-  .name('ai-skillboard')
+  .name('skillboard')
   .description('Unified skill manager across Claude Code, Cursor, openclaw, and Codex')
   .version(pkgVersion);
 
@@ -198,7 +198,7 @@ program
           ).id;
     const history = await getHistory(skillId);
     if (history.length === 0) {
-      process.stdout.write(pc.dim('(no history yet — run `ai-skillboard snapshot` first)\n'));
+      process.stdout.write(pc.dim('(no history yet — run `skillboard snapshot` first)\n'));
       return;
     }
     const limit = Math.max(1, Number.parseInt(opts.limit, 10) || 30);

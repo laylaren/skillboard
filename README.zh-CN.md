@@ -29,7 +29,7 @@ npm run serve    # → ✓ skillboard dashboard at http://127.0.0.1:7300
 发布后可以直接：
 
 ```bash
-npx ai-skillboard
+npx @laylaren/skillboard
 ```
 
 （暂未发布 npm，跟踪 [issue tracker](https://github.com/laylaren/skillboard/issues) 获取发布消息。）

@@ -22,8 +22,8 @@
   ],
   "scripts": {
     "cli": "tsx packages/cli/src/cli.ts",
-    "web:build": "npm --workspace=@ai-skillboard/web run build",
-    "web:dev": "npm --workspace=@ai-skillboard/web run dev",
+    "web:build": "npm --workspace=@laylaren/skillboard-web run build",
+    "web:dev": "npm --workspace=@laylaren/skillboard-web run dev",
     "serve": "tsx packages/cli/src/cli.ts serve",
     "typecheck": "tsc -b",
     "prepare": "npm run web:build --if-present"

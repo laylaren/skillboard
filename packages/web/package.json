@@ -1,7 +1,7 @@
 {
-  "name": "@ai-skillboard/web",
+  "name": "@laylaren/skillboard-web",
   "version": "0.1.0",
-  "description": "React SPA front-end for skillboard (built artifact ships inside @ai-skillboard/server).",
+  "description": "React SPA front-end for skillboard (built artifact ships inside @laylaren/skillboard-server).",
   "license": "MIT",
   "author": "",
   "repository": {

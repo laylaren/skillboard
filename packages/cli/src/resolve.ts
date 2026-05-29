@@ -1,4 +1,4 @@
-import { scan, type Skill } from '@ai-skillboard/core';
+import { scan, type Skill } from '@laylaren/skillboard-core';
 
 export interface ResolveOptions {
   agent?: string;

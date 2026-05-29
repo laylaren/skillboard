@@ -1,5 +1,5 @@
 {
-  "name": "@ai-skillboard/core",
+  "name": "@laylaren/skillboard-core",
   "version": "0.1.0",
   "description": "Core scanner, adapters, and version-management primitives for skillboard.",
   "license": "MIT",
