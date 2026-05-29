@@ -8,7 +8,7 @@
 
 ## What it does
 
-- **Cross-agent inventory** — scans `~/.claude/skills`, `~/.codex/pets`, `~/.cursor/skills-cursor`, `~/.openclaw/skills`, plus any per-project `.claude/skills/` directories you opt into.
+- **Cross-agent inventory** — scans `~/.claude/skills`, `~/.codex/skills`, `~/.cursor/skills-cursor`, `~/.openclaw/skills`, plus any per-project `.claude/skills/` directories you opt into.
 - **Spots duplicates and shadows** — when the same skill name lives in multiple agents or scopes, the dashboard tells you which copy is actually loaded and where the others differ.
 - **Safe merge** — for identical-contents conflicts, collapses copies into a single canonical source via symlinks, with full undo via the trash.
 - **Version history out of the box** — every external edit, install, enable, disable, or manual snapshot is captured in a per-skill git repo under `~/.skillboard/versions/`. Rollback in one click.
@@ -16,7 +16,7 @@
 ## Quick start
 
 ```bash
-git clone https://github.com/<your-github>/skillboard.git
+git clone https://github.com/laylaren/skillboard.git
 cd skillboard
 npm install      # the `prepare` hook auto-builds the SPA bundle
 npm run serve    # → ✓ skillboard dashboard at http://127.0.0.1:7300
@@ -32,14 +32,14 @@ Once published, you'll be able to run it without cloning:
 npx skillboard
 ```
 
-(Not on npm yet — track [the issue tracker](https://github.com/<your-github>/skillboard/issues) for release news.)
+(Not on npm yet — track [the issue tracker](https://github.com/laylaren/skillboard/issues) for release news.)
 
 ## Supported agents
 
 | Agent       | User scope                       | Project / workspace scope         |
 | ----------- | -------------------------------- | --------------------------------- |
 | Claude Code | `~/.claude/skills/`              | `<project>/.claude/skills/`       |
-| Codex       | `~/.codex/pets/`                 | `<project>/.codex/pets/`          |
+| Codex       | `~/.codex/skills/`                 | `<project>/.codex/skills/`          |
 | Cursor      | `~/.cursor/skills-cursor/`       | `<project>/.cursor/skills-cursor/`|
 | openclaw    | `~/.openclaw/skills/` (`system`) | `~/.openclaw/workspace/skills/` (`workspace`) |
 

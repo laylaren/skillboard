@@ -22,7 +22,7 @@
   "projects.skip": "Skip for now",
   "projects.rescan": "Rescan",
   "projects.addManualTitle": "Add project",
-  "projects.addManualBody": "Paste the absolute path of a project root (must contain at least one of .claude/skills/ / .cursor/skills-cursor/ / .codex/pets/).",
+  "projects.addManualBody": "Paste the absolute path of a project root (must contain at least one of .claude/skills/ / .cursor/skills-cursor/ / .codex/skills/).",
   "projects.path": "Path",
   "projects.pathPlaceholder": "/Users/you/Code/my-app",
   "projects.label": "Label (optional)",

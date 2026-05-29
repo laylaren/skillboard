@@ -22,7 +22,7 @@
   "projects.skip": "稍后再说",
   "projects.rescan": "重新扫描",
   "projects.addManualTitle": "添加项目",
-  "projects.addManualBody": "粘贴项目根目录的绝对路径（包含 .claude/skills/ / .cursor/skills-cursor/ / .codex/pets/ 中至少一个）。",
+  "projects.addManualBody": "粘贴项目根目录的绝对路径（包含 .claude/skills/ / .cursor/skills-cursor/ / .codex/skills/ 中至少一个）。",
   "projects.path": "路径",
   "projects.pathPlaceholder": "/Users/you/Code/my-app",
   "projects.label": "标签（可选）",

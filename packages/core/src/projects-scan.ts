@@ -73,7 +73,7 @@ async function hasNonEmptyDir(p: string): Promise<boolean> {
 /**
  * Walk the user's home tree looking for directories that contain at least one
  * of the per-project Agent skill roots (`.claude/skills/`, `.cursor/skills-cursor/`,
- * `.codex/pets/`). Returns each unique match sorted by depth then path.
+ * `.codex/skills/`). Returns each unique match sorted by depth then path.
  *
  * The walk is intentionally simple — depth-limited, prune-list-based — to keep
  * scans sub-second on a typical home folder.
@@ -95,7 +95,7 @@ export async function findProjectCandidates(
       const [hasClaudeCode, hasCursor, hasCodex] = await Promise.all([
         hasNonEmptyDir(join(dir, '.claude', 'skills')),
         hasNonEmptyDir(join(dir, '.cursor', 'skills-cursor')),
-        hasNonEmptyDir(join(dir, '.codex', 'pets')),
+        hasNonEmptyDir(join(dir, '.codex', 'skills')),
       ]);
       if (hasClaudeCode || hasCursor || hasCodex) {
         found.push({ path: dir, basename: basename(dir), hasClaudeCode, hasCursor, hasCodex });

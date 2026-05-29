@@ -8,7 +8,7 @@
 
 ## 它能做什么
 
-- **跨 Agent 清单**——一次性扫描 `~/.claude/skills`、`~/.codex/pets`、`~/.cursor/skills-cursor`、`~/.openclaw/skills`，以及你授权的项目级 `.claude/skills/` 目录。
+- **跨 Agent 清单**——一次性扫描 `~/.claude/skills`、`~/.codex/skills`、`~/.cursor/skills-cursor`、`~/.openclaw/skills`，以及你授权的项目级 `.claude/skills/` 目录。
 - **识别重复和阴影**——同名 skill 出现在多个 Agent 或多个作用域时，告诉你"哪一份真正被加载"，哪些是分叉副本。
 - **安全合并**——内容完全相同的冲突，一键收敛为单一规范源（其余位置替换为 symlink），垃圾桶可撤销。
 - **版本历史开箱即用**——每次外部编辑、安装、启用、停用、手动快照都会落到 `~/.skillboard/versions/` 下每个 skill 一个 git repo，一键回滚。
@@ -16,7 +16,7 @@
 ## 快速开始
 
 ```bash
-git clone https://github.com/<your-github>/skillboard.git
+git clone https://github.com/laylaren/skillboard.git
 cd skillboard
 npm install      # `prepare` 钩子会自动构建 SPA
 npm run serve    # → ✓ skillboard dashboard at http://127.0.0.1:7300
@@ -32,14 +32,14 @@ npm run serve    # → ✓ skillboard dashboard at http://127.0.0.1:7300
 npx skillboard
 ```
 
-（暂未发布 npm，跟踪 [issue tracker](https://github.com/<your-github>/skillboard/issues) 获取发布消息。）
+（暂未发布 npm，跟踪 [issue tracker](https://github.com/laylaren/skillboard/issues) 获取发布消息。）
 
 ## 支持的 Agent
 
 | Agent       | User 作用域                       | Project / Workspace 作用域         |
 | ----------- | -------------------------------- | ---------------------------------- |
 | Claude Code | `~/.claude/skills/`              | `<project>/.claude/skills/`        |
-| Codex       | `~/.codex/pets/`                 | `<project>/.codex/pets/`           |
+| Codex       | `~/.codex/skills/`                 | `<project>/.codex/skills/`           |
 | Cursor      | `~/.cursor/skills-cursor/`       | `<project>/.cursor/skills-cursor/` |
 | openclaw    | `~/.openclaw/skills/` (`system`) | `~/.openclaw/workspace/skills/` (`workspace`) |
 

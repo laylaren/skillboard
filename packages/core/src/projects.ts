@@ -149,7 +149,7 @@ async function hasAnyAgentDir(root: string): Promise<boolean> {
   const candidates = [
     join(root, '.claude', 'skills'),
     join(root, '.cursor', 'skills-cursor'),
-    join(root, '.codex', 'pets'),
+    join(root, '.codex', 'skills'),
   ];
   for (const p of candidates) {
     try {
