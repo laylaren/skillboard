@@ -4,13 +4,13 @@
   "description": "Monorepo root for skillboard — a local dashboard for managing skills across Claude Code, Codex, Cursor, and openclaw.",
   "license": "MIT",
   "author": "",
-  "homepage": "https://github.com/<your-github>/skillboard#readme",
+  "homepage": "https://github.com/laylaren/skillboard#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<your-github>/skillboard.git"
+    "url": "git+https://github.com/laylaren/skillboard.git"
   },
   "bugs": {
-    "url": "https://github.com/<your-github>/skillboard/issues"
+    "url": "https://github.com/laylaren/skillboard/issues"
   },
   "engines": {
     "node": ">=20"

@@ -6,7 +6,7 @@
   "author": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<your-github>/skillboard.git",
+    "url": "git+https://github.com/laylaren/skillboard.git",
     "directory": "packages/web"
   },
   "engines": {

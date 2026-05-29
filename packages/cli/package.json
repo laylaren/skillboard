@@ -4,14 +4,14 @@
   "description": "Local dashboard for inspecting and managing Claude Code / Codex / Cursor / openclaw skills.",
   "license": "MIT",
   "author": "",
-  "homepage": "https://github.com/<your-github>/skillboard#readme",
+  "homepage": "https://github.com/laylaren/skillboard#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<your-github>/skillboard.git",
+    "url": "git+https://github.com/laylaren/skillboard.git",
     "directory": "packages/cli"
   },
   "bugs": {
-    "url": "https://github.com/<your-github>/skillboard/issues"
+    "url": "https://github.com/laylaren/skillboard/issues"
   },
   "keywords": [
     "claude-code",
