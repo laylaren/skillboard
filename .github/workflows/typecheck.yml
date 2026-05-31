@@ -14,5 +14,8 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-      - run: npm ci
+      # --ignore-scripts skips the root `prepare` hook (which runs the Vite/Rollup
+      # web build). Type-checking with `tsc -b` doesn't need the built SPA, and
+      # skipping it avoids Rollup's platform-specific native binary (npm/cli#4828).
+      - run: npm ci --ignore-scripts
       - run: npm run typecheck
